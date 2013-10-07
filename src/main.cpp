@@ -1,7 +1,7 @@
 /**
  * @file    main.cpp
- * @ingroup CppSkeleton
- * @brief   A simple skeleton for C++ development with CMake and Google Test.
+ * @ingroup sorted-vector
+ * @brief   Comparing various implementations of sorted STL containers.
  *
  * Copyright (c) 2013 Sebastien Rombauts (sebastien.rombauts@gmail.com)
  *

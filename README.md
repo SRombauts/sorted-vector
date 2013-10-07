@@ -1,9 +1,9 @@
-cpp-skeleton
+sorted-vector
 ------------
 
-![cpp-skeleton build status](https://api.travis-ci.org/SRombauts/cpp-skeleton.png "cpp-skeleton build status")
+![sorted-vector build status](https://api.travis-ci.org/SRombauts/sorted-vector.png "sorted-vector build status")
 
-A simple skeleton for C++ development with CMake and Google Test.
+Comparing various implementations of sorted STL containers.
 
 Copyright (c) 2013 Sébastien Rombauts (sebastien.rombauts@gmail.com)
 
@@ -51,5 +51,5 @@ ctest .         # make test
 This project is continuously tested under Ubuntu Linux with the gcc and clang compilers
 using the Travis CI community service with the above CMake building and testing procedure.
 
-Detailed results can be seen online: https://travis-ci.org/SRombauts/cpp-skeleton
+Detailed results can be seen online: https://travis-ci.org/SRombauts/sorted-vector
 

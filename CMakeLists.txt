@@ -4,7 +4,7 @@
 # or copy at http://opensource.org/licenses/MIT)
 
 cmake_minimum_required (VERSION 2.6)
-project (CppSkeleton)
+project (sorted-vector)
 
 if(MSVC)
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
@@ -18,10 +18,10 @@ endif()
 set(CCPPLINT_ARG_VERBOSE "--verbose=3")
 
 # add the application executable
-add_executable (CppSkeleton
+add_executable (sorted-vector
  src/main.cpp
  src/base/time.cpp src/base/time.h)
-target_link_libraries (CppSkeleton rt)
+target_link_libraries (sorted-vector rt)
 
 # add a cpplint target
 add_custom_target(cpplint
@@ -36,16 +36,16 @@ include_directories ("${PROJECT_SOURCE_DIR}/googletest/include")
 include_directories ("${PROJECT_SOURCE_DIR}/src")
 
 # add the test executable
-add_executable (TestSkeleton
+add_executable (test-sorted-vector
  src/base/time.cpp src/base/time.h src/base/time_test.cpp)
-target_link_libraries (TestSkeleton rt gtest_main)
+target_link_libraries (test-sorted-vector rt gtest_main)
  
 # add a "test" target:
 enable_testing()
 
 # does the application runs
-add_test (ApplicationRuns CppSkeleton)
+add_test (ApplicationRuns sorted-vector)
 
 # does the tests pass
-add_test (TestsPass TestSkeleton)
+add_test (TestsPass test-sorted-vector)
 
