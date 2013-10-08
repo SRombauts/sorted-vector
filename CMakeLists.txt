@@ -20,6 +20,7 @@ set(CCPPLINT_ARG_VERBOSE "--verbose=3")
 # add the application executable
 add_executable (sorted-vector
  src/main.cpp
+ src/base/random.cpp src/base/random.h
  src/base/time.cpp src/base/time.h)
 target_link_libraries (sorted-vector rt)
 
@@ -37,6 +38,7 @@ include_directories ("${PROJECT_SOURCE_DIR}/src")
 
 # add the test executable
 add_executable (test-sorted-vector
+ src/base/random.cpp src/base/random.h src/base/random_test.cpp
  src/base/time.cpp src/base/time.h src/base/time_test.cpp)
 target_link_libraries (test-sorted-vector rt gtest_main)
  
