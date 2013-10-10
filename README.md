@@ -5,6 +5,13 @@ sorted-vector
 
 Comparing various implementations of sorted STL containers.
 
+(C++11, Boost) * (sizes: 25, 100, 250) * (random, forward, reverse) * (10000 run) :
+- filling
+- full copy
+- 1000 random find
+- (futur) 10 random insertion
+- (futur) 10 random removal
+
 Copyright (c) 2013 Sébastien Rombauts (sebastien.rombauts@gmail.com)
 
 ## Building & testing with CMake

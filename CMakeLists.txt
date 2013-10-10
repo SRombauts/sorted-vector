@@ -45,8 +45,8 @@ target_link_libraries (test-sorted-vector rt gtest_main)
 # add a "test" target:
 enable_testing()
 
-# does the application runs
-add_test (ApplicationRuns sorted-vector)
+# does the application runs : no, it became to long for Travis CI
+#add_test (ApplicationRuns sorted-vector)
 
 # does the tests pass
 add_test (TestsPass test-sorted-vector)
