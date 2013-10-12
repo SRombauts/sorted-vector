@@ -1,6 +1,6 @@
 /**
  * @file    random.cpp
- * @ingroup base
+ * @ingroup Utils
  * @brief   Random utility functions.
  *
  * Copyright (c) 2013 Sebastien Rombauts (sebastien.rombauts@gmail.com)
@@ -9,9 +9,11 @@
  * or copy at http://opensource.org/licenses/MIT)
  */
 
-#include "base/random.h"
+#include "utils/random.h"
 
-#include <cstdlib>  // rand_r()
+#include <cstdlib>  // rand()
+
+namespace Utils {
 
 // Generate a printable alphanumeric character.
 char Random::GenChar() {
@@ -31,3 +33,5 @@ void Random::GenString(char* str, size_t len) {
 
     str[len] = '\0';
 }
+
+} // namespace Utils

@@ -1,6 +1,6 @@
 /**
  * @file    time.cpp
- * @ingroup base
+ * @ingroup Utils
  * @brief   Simple time tools.
  *
  * Copyright (c) 2013 Sebastien Rombauts (sebastien.rombauts@gmail.com)
@@ -9,8 +9,9 @@
  * or copy at http://opensource.org/licenses/MIT)
  */
 
-#include "time.h"
+#include "utils/time.h"
 
+namespace Utils {
 
 time_t Time::getTickMs() {
     time_t          TickMs = 0;
@@ -52,4 +53,6 @@ time_t Time::diff(const time_t aStartTime, const time_t aEndTime) {
 
     return deltaTime;
 }
+
+} // namespace Utils
 

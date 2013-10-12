@@ -15,7 +15,7 @@
 #include <algorithm>
 #include <numeric>
 
-#include "base/time.h"
+#include "utils/time.h"
 
 /**
  * @brief Store all benchmarks results
@@ -29,7 +29,7 @@ struct Results {
 };
 
 /**
- * @enum Orders in which containers are filled
+ * @brief Orders in which containers are filled
 */
 enum Order {
     eOrderRandom,   ///< Filled with random integers
@@ -47,7 +47,7 @@ const char* OrderToString(const Order aOrder) {
         case eOrderRandom:  pOrderString = "random";    break;
         case eOrderForward: pOrderString = "forward";   break;
         case eOrderReverse: pOrderString = "reverse";   break;
-        default:            pOrderString = "?";
+        default:            pOrderString = "?";         break;
     }
 
     return pOrderString;
@@ -87,6 +87,8 @@ void generateValues(const size_t aSize, const Order aOrder, std::vector<TVal>& a
  */
 template<typename T>
 void runTest(const size_t aSize, const Order aOrder, Results& aResults) {
+    using Utils::Time;
+
     for (size_t idxTest = 0;
                 idxTest < 10000;
                 ++idxTest) {

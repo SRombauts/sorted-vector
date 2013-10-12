@@ -625,7 +625,8 @@ class _CppLintState(object):
     for category, count in self.errors_by_category.iteritems():
       sys.stderr.write('cpplint: Category \'%s\' errors found: %d\n' %
                        (category, count))
-    sys.stderr.write('cpplint: Total errors found: %d\n' % self.error_count)
+    if 0 < self.error_count:
+      sys.stderr.write('cpplint: Total errors found: %d\n' % self.error_count)
 
 _cpplint_state = _CppLintState()
 
