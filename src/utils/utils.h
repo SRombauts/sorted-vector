@@ -14,11 +14,17 @@
  */
 /**
  * @dir     utils Utils
- * @ingroup Utils Utils
  * @brief   Shared utilities.
+ * @ingroup Utils Utils
  */
-
 #pragma once
+
+/**
+ * @brief   Shared utilities.
+ * @ingroup Utils Utils
+ */
+namespace Utils {
+} // namespace Utils
 
 #include <cstddef>
 
@@ -43,4 +49,3 @@
 #if _MSC_VER
 #define snprintf _snprintf
 #endif
-

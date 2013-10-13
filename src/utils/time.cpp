@@ -13,6 +13,7 @@
 
 namespace Utils {
 
+// Get tick in microseconds.
 time_t Time::getTickMs() {
     time_t          TickMs = 0;
     int             Res;
@@ -27,6 +28,7 @@ time_t Time::getTickMs() {
     return TickMs;
 }
 
+// Get tick in milliseconds.
 time_t Time::getTickUs() {
     time_t          TickUs = 0;
     int             Res;
@@ -41,6 +43,7 @@ time_t Time::getTickUs() {
     return TickUs;
 }
 
+// Calculate difference between consecutive ticks.
 time_t Time::diff(const time_t aStartTime, const time_t aEndTime) {
     time_t deltaTime;
     if (aStartTime <= aEndTime) {

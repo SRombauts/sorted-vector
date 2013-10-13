@@ -14,8 +14,8 @@
 #include <algorithm>
 #include <numeric>
 
+#include "utils/measure.h"
 #include "utils/random.h"
-#include "utils/time.h"
 
 /**
  * @brief Store all benchmarks results
@@ -87,10 +87,10 @@ void generateValues(const size_t aSize, const Order aOrder, std::vector<TVal>& a
  */
 template<typename T>
 void runTest(const size_t aSize, const Order aOrder, Results& aResults) {
-    using Utils::Time;
+    using Utils::Measure;
 
     for (size_t idxTest = 0;
-                idxTest < 1000;
+                idxTest < 10000;
                 ++idxTest) {
         // Pre-generate random values for the following tests
         std::vector<typename T::value_type> values(aSize);
@@ -100,32 +100,30 @@ void runTest(const size_t aSize, const Order aOrder, Results& aResults) {
         ////////////////////////////////////////////////////////////////////////
         // Filling the container with the pre-generated values:
         {
-            time_t  startUs = Time::getTickUs();
+            Measure measure;
             for (size_t idxValue = 0;
                         idxValue < aSize;
                         ++idxValue) {
                 container.push_back(values[idxValue]);
             }
-            time_t  endUs   = Time::getTickUs();
-            time_t  deltaUs = Time::diff(startUs, endUs);
+            time_t  deltaUs = measure.diff();
             aResults.fillingUs.push_back(deltaUs);
         }
 
         ////////////////////////////////////////////////////////////////////////
         // Copying the filled container:
         {
-            time_t  startUs = Time::getTickUs();
+            Measure measure;
             T       container2;
             container2 = container;
-            time_t  endUs   = Time::getTickUs();
-            time_t  deltaUs = Time::diff(startUs, endUs);
+            time_t  deltaUs = measure.diff();
             aResults.copyingUs.push_back(deltaUs);
         }
 
         ////////////////////////////////////////////////////////////////////////
         // Finding the pre-generated values in the container:
         {
-            time_t  startUs = Time::getTickUs();
+            Measure measure;
             for (size_t nbFind = 0;
                         nbFind < 1000;
                         ++nbFind) {
@@ -133,8 +131,7 @@ void runTest(const size_t aSize, const Order aOrder, Results& aResults) {
                                                         container.end(),
                                                         container[nbFind%aSize]);
             }
-            time_t  endUs   = Time::getTickUs();
-            time_t  deltaUs = Time::diff(startUs, endUs);
+            time_t  deltaUs = measure.diff();
             aResults.findingUs.push_back(deltaUs);
         }
     }
