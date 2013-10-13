@@ -34,6 +34,16 @@ public:
     static unsigned long gen(unsigned long aMax);
 
     /**
+     * @brief Generate an integer between aMin and aMax (<= RAND_MAX).
+     *
+     * @param[in] aMin  Minimum value to generate
+     * @param[in] aMax  Maximum value to generate
+     *
+     * @return A random printable character.
+     */
+    static unsigned long gen(unsigned long aMin, unsigned long aMax);
+
+    /**
      * @brief Generate a printable alphanumeric character.
      *
      * @return A random printable character.

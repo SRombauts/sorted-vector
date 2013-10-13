@@ -58,28 +58,35 @@ const char* OrderToString(const Order aOrder) {
  */
 template<typename TVal>
 void generateValues(const size_t aSize, const Order aOrder, std::vector<TVal>& aValues) {
-    TVal value;
+    TVal value = (TVal)-1;
+
+    aValues.reserve(aSize);
     if (eOrderReverse != aOrder) {
-        value = (TVal)-1;
-    } else {
-        value = (TVal)aSize;
-    }
-    for (size_t elt = 0;
-                elt < aSize;
-                ++elt) {
-        switch (aOrder) {
-            case eOrderRandom:
-                value = (TVal)Utils::Random::gen(aSize - 1);
-                break;
-            case eOrderForward:
-                ++value;
-                break;
-            case eOrderReverse:
-                --value;
-                break;
+        for (size_t elt = 0;
+                    elt < aSize;
+                    ++elt) {
+            if (eOrderRandom == aOrder) {
+                value = (TVal)Utils::Random::gen(5 * aSize);
+            } else { // eOrderForward
+                value += (TVal)(Utils::Random::gen(1, 10));
+            }
+            aValues[elt] = value;
         }
-        aValues.push_back(value);
+    } else { // eOrderReverse
+        for (size_t elt = aSize;
+                    elt > 0;
+                    --elt) {
+            value += (TVal)(Utils::Random::gen(1, 10));
+            aValues[elt - 1] = value;
+        }
     }
+
+    /** TODO(SRombauts)
+    for (size_t elt = 0; elt < aSize; ++elt) {
+        printf("%u, ", aValues[elt]);
+    }
+    printf("\n");
+    */
 }
 
 /**
