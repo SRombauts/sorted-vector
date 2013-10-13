@@ -38,6 +38,25 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<folderInfo id="cdt.managedbuild.toolchain.gnu.base.623094422.1776308282" name="/" resourcePath="build">
+						<toolChain id="cdt.managedbuild.toolchain.gnu.base.537602068" name="cdt.managedbuild.toolchain.gnu.base" superClass="cdt.managedbuild.toolchain.gnu.base" unusedChildren="">
+							<tool id="cdt.managedbuild.tool.gnu.archiver.base.453657293" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.1506135488"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1507291780" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.1366881236">
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1165933619" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.638335871" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.599446722">
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.921862252" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.302608131" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base.691652502"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1325545694" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base.767722471"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.base.2105857416" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base.783750316">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.606793865" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry excluding="build|doc" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
@@ -46,13 +65,19 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="sorted-vector.null.1614265621" name="sorted-vector"/>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Default">
 			<resource resourceType="PROJECT" workspacePath="/sorted-vector"/>
 		</configuration>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.623094422;cdt.managedbuild.toolchain.gnu.base.623094422.411668349;cdt.managedbuild.tool.gnu.cpp.compiler.base.1366881236;cdt.managedbuild.tool.gnu.cpp.compiler.input.1959559635">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.623094422;cdt.managedbuild.toolchain.gnu.base.623094422.411668349;cdt.managedbuild.tool.gnu.c.compiler.base.599446722;cdt.managedbuild.tool.gnu.c.compiler.input.1157095248">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
 	</storageModule>
 </cproject>

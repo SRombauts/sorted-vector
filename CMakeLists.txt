@@ -25,10 +25,18 @@ add_executable (sorted-vector
  src/utils/utils.h)
 target_link_libraries (sorted-vector rt)
 
-# add a cpplint target
+# add a cpplint target to the "all" target
 add_custom_target(cpplint
  ALL
- COMMAND python ${PROJECT_SOURCE_DIR}/cpplint.py ${CCPPLINT_ARG_OUTPUT} ${CCPPLINT_ARG_VERBOSE} ${PROJECT_SOURCE_DIR}/src/*.* ${PROJECT_SOURCE_DIR}/src/*/*.* 
+ COMMAND python cpplint.py ${CCPPLINT_ARG_OUTPUT} ${CCPPLINT_ARG_VERBOSE} src/*.* src/*/*.* 
+ WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+)
+
+# add a Doxygen target to the "all" target
+add_custom_target(doxygen
+ ALL
+ COMMAND doxygen Doxyfile > /dev/null 
+ WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
 )
 
 # add the subdirectory containing the CMakeLists.txt for the gtest library
