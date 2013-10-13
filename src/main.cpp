@@ -10,11 +10,11 @@
  */
 
 #include <cstdio>
-#include <cstdlib>
 #include <vector>
 #include <algorithm>
 #include <numeric>
 
+#include "utils/random.h"
 #include "utils/time.h"
 
 /**
@@ -60,7 +60,7 @@ template<typename TVal>
 void generateValues(const size_t aSize, const Order aOrder, std::vector<TVal>& aValues) {
     TVal value;
     if (eOrderReverse != aOrder) {
-        value = (TVal)0;
+        value = (TVal)-1;
     } else {
         value = (TVal)aSize;
     }
@@ -69,7 +69,7 @@ void generateValues(const size_t aSize, const Order aOrder, std::vector<TVal>& a
                 ++elt) {
         switch (aOrder) {
             case eOrderRandom:
-                value = (TVal)(rand()%aSize);
+                value = (TVal)Utils::Random::gen(aSize - 1);
                 break;
             case eOrderForward:
                 ++value;
@@ -90,15 +90,15 @@ void runTest(const size_t aSize, const Order aOrder, Results& aResults) {
     using Utils::Time;
 
     for (size_t idxTest = 0;
-                idxTest < 10000;
+                idxTest < 1000;
                 ++idxTest) {
-        // Generate values for the test
+        // Pre-generate random values for the following tests
         std::vector<typename T::value_type> values(aSize);
         generateValues<typename T::value_type>(aSize, aOrder, values);
 
         T   container;
         ////////////////////////////////////////////////////////////////////////
-        // Filling :
+        // Filling the container with the pre-generated values:
         {
             time_t  startUs = Time::getTickUs();
             for (size_t idxValue = 0;
@@ -112,7 +112,7 @@ void runTest(const size_t aSize, const Order aOrder, Results& aResults) {
         }
 
         ////////////////////////////////////////////////////////////////////////
-        // Copying :
+        // Copying the filled container:
         {
             time_t  startUs = Time::getTickUs();
             T       container2;
@@ -123,13 +123,15 @@ void runTest(const size_t aSize, const Order aOrder, Results& aResults) {
         }
 
         ////////////////////////////////////////////////////////////////////////
-        // Finding :
+        // Finding the pre-generated values in the container:
         {
             time_t  startUs = Time::getTickUs();
             for (size_t nbFind = 0;
                         nbFind < 1000;
                         ++nbFind) {
-                typename T::iterator iValue = std::find(container.begin(), container.end(), (typename T::value_type)(rand()%aSize));
+                typename T::iterator iValue = std::find(container.begin(),
+                                                        container.end(),
+                                                        container[nbFind%aSize]);
             }
             time_t  endUs   = Time::getTickUs();
             time_t  deltaUs = Time::diff(startUs, endUs);
@@ -145,12 +147,10 @@ void runTest(const size_t aSize, const Order aOrder, Results& aResults) {
  * - filling
  * - full copy
  * - 1000 random find
- * - (futur) 10 random insertion
- * - (futur) 10 random removal
+ * - (future) 10 random insertion
+ * - (future) 10 random removal
 */
 int main() {
-    srand(time(0));
-
     Order tabOrder[] = {eOrderRandom, eOrderForward, eOrderReverse};
     size_t tabSizes[] = {25, 100, 250};
 

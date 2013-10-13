@@ -15,15 +15,15 @@
 
 #include "gtest/gtest.h"
 
-TEST(Random, GenChar) {
-    EXPECT_NE(Utils::Random::GenChar(), Utils::Random::GenChar());
+TEST(Random, genChar) {
+    EXPECT_NE(Utils::Random::genChar(), Utils::Random::genChar());
 }
 
-TEST(Random, GenString) {
+TEST(Random, genString) {
     #define NB_CHAR 10
     char str1[NB_CHAR+1] = "";
     char str2[NB_CHAR+1] = "";
-    Utils::Random::GenString(str1, NB_CHAR);
-    Utils::Random::GenString(str2, NB_CHAR);
+    Utils::Random::genString(str1, NB_CHAR);
+    Utils::Random::genString(str2, NB_CHAR);
     EXPECT_STRNE(str1, str2);
 }

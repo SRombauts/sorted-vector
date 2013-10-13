@@ -1,14 +1,13 @@
 /**
  * @file    random.h
  * @ingroup Utils
- * @brief   Random utility functions.
+ * @brief   Generating random data.
  *
  * Copyright (c) 2013 Sebastien Rombauts (sebastien.rombauts@gmail.com)
  *
  * Distributed under the MIT License (MIT) (See accompanying file LICENSE.txt
  * or copy at http://opensource.org/licenses/MIT)
  *
- * @todo Add a static initializer rand(time(0))
  * @todo Add a simple Rand(modulo) method
  */
 #pragma once
@@ -18,21 +17,50 @@
 namespace Utils {
 
 /**
- * @brief Random utility functions.
+ * @brief   Generating random data.
  * @ingroup Utils
+ *
+ * Getting various type of random data.
  */
 class Random {
 public:
     /**
-     * @brief Generate a printable alphanumeric character.
+     * @brief Generate an integer between 0 and aMax (<= RAND_MAX).
+     *
+     * @param[in] aMax  Maximum value to generate (using modulo aMax+1)
+     *
+     * @return A random printable character.
      */
-    static char GenChar();
+    static unsigned long gen(unsigned long aMax);
+
+    /**
+     * @brief Generate a printable alphanumeric character.
+     *
+     * @return A random printable character.
+     */
+    static char genChar();
 
     /**
      * @brief Generate a printable alphanumeric string.
+     *
+     * @return A random printable string.
      */
-    static void GenString(char* str, size_t len);
+    static void genString(char* str, size_t len);
+
+    /**
+     * @brief Initializer of the random generator
+     */
+    class Init {
+    public:
+        /**
+         * @brief Initialize the random generator with the current time
+         */
+        Init();
+    };
 };
+
+// static Random::Init _mInit;
+
 
 } // namespace Utils
 
