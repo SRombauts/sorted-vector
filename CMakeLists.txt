@@ -24,7 +24,12 @@ add_executable (sorted-vector
  src/utils/random.cpp src/utils/random.h
  src/utils/time.cpp src/utils/time.h
  src/utils/utils.h)
-target_link_libraries (sorted-vector rt)
+
+if(MSVC)
+    target_link_libraries (sorted-vector)
+else()
+    target_link_libraries (sorted-vector rt)
+endif()
 
 # add a cpplint target to the "all" target
 add_custom_target(cpplint
@@ -51,12 +56,16 @@ add_executable (test-sorted-vector
  src/utils/measure.cpp src/utils/measure.h
  src/utils/random.cpp src/utils/random.h src/utils/random_test.cpp
  src/utils/time.cpp src/utils/time.h src/utils/time_test.cpp)
-target_link_libraries (test-sorted-vector rt gtest_main)
- 
+if(MSVC)
+   target_link_libraries (test-sorted-vector gtest_main)
+else()
+   target_link_libraries (test-sorted-vector rt gtest_main)
+endif()
+
 # add a "test" target:
 enable_testing()
 
-# does the application runs : no, it became to long for Travis CI
+# does the application runs : now it takes too long for running on Travis CI
 #add_test (ApplicationRuns sorted-vector)
 
 # does the tests pass
