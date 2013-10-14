@@ -56,9 +56,8 @@ const char* OrderToString(const Order aOrder) {
 /**
  * @brief Generate values in the order specified for the test
  */
-template<typename TVal>
-void generateValues(const size_t aSize, const Order aOrder, std::vector<TVal>& aValues) {
-    TVal value = (TVal)-1;
+void generateValues(const size_t aSize, const Order aOrder, std::vector<size_t>& aValues) {
+    size_t value = (size_t)-1;
 
     aValues.reserve(aSize);
     if (eOrderReverse != aOrder) {
@@ -66,9 +65,9 @@ void generateValues(const size_t aSize, const Order aOrder, std::vector<TVal>& a
                     elt < aSize;
                     ++elt) {
             if (eOrderRandom == aOrder) {
-                value = (TVal)Utils::Random::gen(5 * aSize);
+                value = (size_t)Utils::Random::gen(5 * aSize);
             } else { // eOrderForward
-                value += (TVal)(Utils::Random::gen(1, 10));
+                value += (size_t)(Utils::Random::gen(1, 10));
             }
             aValues[elt] = value;
         }
@@ -76,7 +75,7 @@ void generateValues(const size_t aSize, const Order aOrder, std::vector<TVal>& a
         for (size_t elt = aSize;
                     elt > 0;
                     --elt) {
-            value += (TVal)(Utils::Random::gen(1, 10));
+            value += (size_t)(Utils::Random::gen(1, 10));
             aValues[elt - 1] = value;
         }
     }
@@ -90,6 +89,27 @@ void generateValues(const size_t aSize, const Order aOrder, std::vector<TVal>& a
 }
 
 /**
+ * @brief Data index by Id
+ */
+class Data {
+public:
+    Data() :
+        mId(0) {
+    }
+    explicit Data(const size_t aId) :
+        mId(aId) {
+    }
+    inline size_t getId() const {
+        return mId;
+    }
+    bool operator==(const Data& aData) const {
+        return (aData.getId() == mId);
+    }
+private:
+    size_t  mId;
+};
+
+/**
  * @brief Run each test thousands times
  */
 template<typename T>
@@ -100,8 +120,8 @@ void runTest(const size_t aSize, const Order aOrder, Results& aResults) {
                 idxTest < 10000;
                 ++idxTest) {
         // Pre-generate random values for the following tests
-        std::vector<typename T::value_type> values(aSize);
-        generateValues<typename T::value_type>(aSize, aOrder, values);
+        std::vector<size_t> values(aSize);
+        generateValues(aSize, aOrder, values);
 
         T   container;
         ////////////////////////////////////////////////////////////////////////
@@ -111,7 +131,7 @@ void runTest(const size_t aSize, const Order aOrder, Results& aResults) {
             for (size_t idxValue = 0;
                         idxValue < aSize;
                         ++idxValue) {
-                container.push_back(values[idxValue]);
+                container.push_back(Data(values[idxValue]));
             }
             time_t  deltaUs = measure.diff();
             aResults.fillingUs.push_back(deltaUs);
@@ -144,6 +164,31 @@ void runTest(const size_t aSize, const Order aOrder, Results& aResults) {
     }
 }
 
+template<typename T>
+class Vector : public std::vector<T> {
+};
+
+/*
+template<typename T>
+class Vector {
+public:
+//  typedef std::vector<typename T>::iterator  iterator;
+    typedef std::vector<T>::iterator  iterator;
+
+    typename std::vector<T>::iterator begin() {
+        return mVector.begin();
+    }
+    typename std::vector<T>::iterator& end() {
+        return mVector.end();
+    }
+    void push_back(const T& aVal) {
+        return mVector.push_back(aVal);
+    }
+private:
+    std::vector<T>  mVector;
+};
+*/
+
 /**
  * @brief Run various benchmarks on different containers
  *
@@ -169,7 +214,7 @@ int main() {
             printf("%i %s; ", size, OrderToString(order));
 
             Results results;
-            runTest<std::vector<size_t> >(size, order, results);
+            runTest<Vector<Data> >(size, order, results);
             time_t  fillingMs   = std::accumulate(results.fillingUs.begin(), results.fillingUs.end(), 0)/1000;
             time_t  copyingMs   = std::accumulate(results.copyingUs.begin(), results.copyingUs.end(), 0)/1000;
             time_t  findingMs   = std::accumulate(results.findingUs.begin(), results.findingUs.end(), 0)/1000;
